@@ -1,0 +1,26 @@
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjQ1MjMzNDksInVpZCI6MjIsImV4cCI6MTcyNDUyNjk0OSwiaXNzIjoibG9jYWxob3N0In0.bO6vyKtYDm16nm4zy5ov1VmpHWlFbXrktpcqfrmvWUI
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjQ1MjMzNDksInVpZCI6MjIsImV4cCI6MTcyNDUyNjk0OSwiaXNzIjoibG9jYWxob3N0In0.bO6vyKtYDm16nm4zy5ov1VmpHWlFbXrktpcqfrmvWUI
+
+//get the list of services from the services array
+  const dataToSend = {
+    apiKey: this.value,
+  };
+  //convert data to JSON
+  const jsonString =  JSON.stringify(dataToSend);
+
+  // Create a new XMLHttpRequest object
+  const xhttp = new XMLHttpRequest();
+
+  // Define a callback function to handle the server response
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      // Redirect only after receiving confirmation from the server
+      console.log(\'Server response: \' + this.responseText);
+      window.location.href = \'index.php?page=editapi\';
+    }
+  };
+
+  // Send the API key to the server via POST
+  xhttp.open(\'POST\', \'savesession.php\', true);
+  xhttp.setRequestHeader(\'Content-type\', \'application/x-www-form-urlencoded\');
+  xhttp.send(\'apikey=' . encodeURIComponent(jsonString) . '\');
